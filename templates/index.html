@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterYou - Create Account</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+    <!-- Header com logotipo e barra de pesquisa -->
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="BetterYou Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+    </header>
+
+    <!-- Card centralizado para criação de conta -->
+    <div class="container">
+        <div class="card">
+            <h3 class="text-center">Create New Account</h3>
+            <p class="text-center">Already Registered? <a href="/login">Login</a></p>
+            <p class="text-center">Forgot password? <a href="/forgot-password">Change password</a></p>
+            <!-- Formulário de criação de conta com ação e método POST -->
+            <form class="form-content" action="/register" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

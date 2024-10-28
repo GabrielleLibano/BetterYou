@@ -1,0 +1,155 @@
+/* Estilos globais */
+body {
+    background-color: #f8f9fa; /* Fundo suave */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Cabeçalho com logotipo e barra de pesquisa */
+.header {
+    background-color: #d0dfed;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.search-bar {
+    margin-right: 25%; /* Ajusta o campo de busca mais próximo do centro */
+}
+
+.search-bar input {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    width: 250px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do container centralizado */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 80px; /* Compensa o espaço do cabeçalho */
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+/* Card de criação de conta */
+.card {
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    background-color: #d0dfed; /* Cor do cartão */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: -50px; /* Ajuste fino para centralização */
+}
+
+form.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.card h3 {
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.card a {
+    color: #2d456b;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+/* Botão de ação */
+.btn-primary {
+    background-color: #2d456b;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #2d456b;
+}
+
+/* Campos de entrada */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    color: #495057;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Foco nos campos de entrada */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/*Login*/
+/* Container para o campo de senha e o botão de alternância */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 300px; /* Mesma largura dos campos */
+}
+
+.password-container .form-control {
+    flex: 1;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 8px;
+    padding: 0;
+}
