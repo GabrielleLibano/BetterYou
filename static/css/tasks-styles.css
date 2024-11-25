@@ -1,0 +1,89 @@
+/* Estilos gerais para todas as telas de tarefas */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+input, textarea, select, button {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Específico para lista de tarefas */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-list li {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-list li:last-child {
+    border-bottom: none;
+}
+
+.task-list h4 {
+    margin: 0;
+    color: #007bff;
+}
+
+.task-actions {
+    display: flex;
+    gap: 1rem;
+}

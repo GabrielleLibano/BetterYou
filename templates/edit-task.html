@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tasks-styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h3>Edit Task</h3>
+            <form action="/tasks/edit/{{ task.id }}" method="POST">
+                <label for="title">Task Title</label>
+                <input type="text" id="title" name="title" value="{{ task.title }}" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" required>{{ task.description }}</textarea>
+
+                <label for="due_date">Due Date</label>
+                <input type="date" id="due_date" name="due_date" value="{{ task.due_date }}">
+
+                <label for="is_completed">Completed</label>
+                <input type="checkbox" id="is_completed" name="is_completed" {% if task.is_completed %}checked{% endif %}>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

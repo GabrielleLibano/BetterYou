@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tasks-styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h3>My Tasks</h3>
+        <ul class="task-list">
+            {% for task in tasks %}
+            <li>
+                <div>
+                    <h4>{{ task.title }}</h4>
+                    <p>{{ task.description }}</p>
+                    <p>Due: {{ task.due_date }}</p>
+                    <p>Status: {{ 'Completed' if task.is_completed else 'Pending' }}</p>
+                </div>
+                <div class="task-actions">
+                    <a href="/tasks/edit/{{ task.id }}">Edit</a>
+                    <form action="/tasks/delete/{{ task.id }}" method="POST" style="display:inline;">
+                        <button type="submit" style="color:red;">Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

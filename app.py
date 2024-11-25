@@ -21,6 +21,17 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)  # Guardaremos as senhas com hash
     date_of_birth = db.Column(db.Date, nullable=False)
+    tasks = db.relationship('Task', backref='user', lazy=True)
+
+# Modelo de Tarefa
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime, nullable=True)
+    is_completed = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 # Rota para processar a criação de conta
 @app.route('/register', methods=['POST'])
@@ -73,8 +84,13 @@ def forgot_password():
 def do_login():
     email = request.form.get('email')
     password = request.form.get('password')
-    flash('Login successful!', 'success')
-    return redirect(url_for('login'))
+    user = User.query.filter_by(email=email).first()
+    if user and check_password_hash(user.password, password):
+        flash('Login successful!', 'success')
+        return redirect(url_for('list_tasks'))
+    else:
+        flash('Invalid email or password.', 'danger')
+        return redirect(url_for('login'))
 
 # Rota para processar o envio de recuperação de senha
 @app.route('/send-recovery', methods=['POST'])
@@ -83,5 +99,55 @@ def send_recovery():
     flash('Password reset instructions sent!', 'info')
     return redirect(url_for('forgot_password'))
 
+# Rotas para Gerenciamento de Tarefas
+@app.route('/tasks', methods=['GET'])
+def list_tasks():
+    user_id = 1  # Substituir com o ID do usuário autenticado (mockado por enquanto)
+    tasks = Task.query.filter_by(user_id=user_id).all()
+    return render_template('list-tasks.html', tasks=tasks)
+
+@app.route('/tasks/create', methods=['GET', 'POST'])
+def create_task():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        due_date = request.form.get('due_date')
+        if due_date:
+            due_date = datetime.strptime(due_date, '%Y-%m-%d')
+        user_id = 1  # Substituir com o ID do usuário autenticado
+        new_task = Task(title=title, description=description, due_date=due_date, user_id=user_id)
+        db.session.add(new_task)
+        db.session.commit()
+        flash('Task created successfully!', 'success')
+        return redirect(url_for('list_tasks'))
+
+    return render_template('create-task.html')
+
+@app.route('/tasks/edit/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    if request.method == 'POST':
+        task.title = request.form['title']
+        task.description = request.form['description']
+        due_date = request.form.get('due_date')
+        if due_date:
+            task.due_date = datetime.strptime(due_date, '%Y-%m-%d')
+        task.is_completed = 'is_completed' in request.form
+        db.session.commit()
+        flash('Task updated successfully!', 'success')
+        return redirect(url_for('list_tasks'))
+
+    return render_template('edit-task.html', task=task)
+
+@app.route('/tasks/delete/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    flash('Task deleted successfully!', 'success')
+    return redirect(url_for('list_tasks'))
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Cria as tabelas no banco de dados, caso não existam
     app.run(debug=True)
